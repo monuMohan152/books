@@ -67,7 +67,7 @@
 
     .search-box {
       width: 100%;
-      padding: 16px 60px 16px 24px;
+      padding: 16px 100px 16px 24px;
       border-radius: 16px;
       border: 2px solid rgba(99, 102, 241, 0.1);
       font-size: 1.1rem;
@@ -82,6 +82,47 @@
       border-color: #6366f1;
       box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
       transform: translateY(-2px);
+    }
+
+    .voice-btn {
+      position: absolute;
+      right: 60px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
+    }
+
+    .voice-btn:hover {
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+    }
+
+    .voice-btn.listening {
+      background: linear-gradient(135deg, #ef4444, #f97316);
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    .voice-btn.processing {
+      background: linear-gradient(135deg, #f59e0b, #eab308);
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: translateY(-50%) scale(1);
+        box-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
+      }
+      50% {
+        transform: translateY(-50%) scale(1.1);
+        box-shadow: 0 4px 20px rgba(239, 68, 68, 0.5);
+      }
     }
 
     .search-icon {
@@ -316,6 +357,17 @@
         font-size: 1rem;
       }
       
+      .search-box {
+        padding: 16px 90px 16px 20px;
+        font-size: 1rem;
+      }
+      
+      .voice-btn {
+        right: 50px;
+        padding: 6px 10px;
+        font-size: 1rem;
+      }
+      
       .filters {
         max-height: 150px;
         gap: 8px;
@@ -364,6 +416,7 @@
             
             <div class="search-container">
                 <input type="text" id="searchBox" class="search-box" placeholder="Search materials by name, keywords, description, or topics...">
+                <button id="voiceBtn" class="voice-btn" title="Click to speak your search">🎤</button>
                 <span class="search-icon">🔍</span>
             </div>
             
@@ -396,10 +449,13 @@
 let materials = [];
 let filteredMaterials = [];
 let currentFilter = 'all';
+let recognition = null;
+let isListening = false;
 
 function init() {
   loadMaterials();
   setupSearchListener();
+  setupVoiceRecognition();
 }
 
 async function loadMaterials() {
@@ -540,6 +596,95 @@ function generateFilters() {
 function setupSearchListener() {
   const searchBox = document.getElementById('searchBox');
   searchBox.addEventListener('input', debounce(handleSearch, 300));
+}
+
+function setupVoiceRecognition() {
+  const voiceBtn = document.getElementById('voiceBtn');
+  
+  // Check if browser supports speech recognition
+  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+    voiceBtn.style.display = 'none';
+    console.log('Speech recognition not supported in this browser');
+    return;
+  }
+
+  // Initialize speech recognition
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  recognition = new SpeechRecognition();
+  
+  recognition.continuous = false;
+  recognition.interimResults = false;
+  recognition.lang = 'en-US';
+
+  voiceBtn.addEventListener('click', toggleVoiceRecognition);
+
+  recognition.onstart = () => {
+    isListening = true;
+    voiceBtn.classList.add('listening');
+    voiceBtn.title = 'Listening... Click to stop';
+    console.log('Voice recognition started');
+  };
+
+  recognition.onresult = (event) => {
+    const transcript = event.results[0][0].transcript;
+    console.log('Voice input:', transcript);
+    
+    const searchBox = document.getElementById('searchBox');
+    searchBox.value = transcript;
+    
+    // Trigger search
+    handleSearch({ target: searchBox });
+    
+    // Visual feedback
+    voiceBtn.classList.remove('listening');
+    voiceBtn.classList.add('processing');
+    setTimeout(() => {
+      voiceBtn.classList.remove('processing');
+    }, 1000);
+  };
+
+  recognition.onerror = (event) => {
+    console.error('Speech recognition error:', event.error);
+    isListening = false;
+    voiceBtn.classList.remove('listening', 'processing');
+    voiceBtn.title = 'Click to speak your search';
+    
+    // Show user-friendly error messages
+    let errorMessage = 'Voice recognition error. ';
+    switch(event.error) {
+      case 'no-speech':
+        errorMessage += 'No speech detected. Please try again.';
+        break;
+      case 'network':
+        errorMessage += 'Network error. Check your connection.';
+        break;
+      case 'not-allowed':
+        errorMessage += 'Microphone access denied. Please allow microphone access.';
+        break;
+      default:
+        errorMessage += 'Please try again.';
+    }
+    
+    // You could add a toast notification here if desired
+    console.log(errorMessage);
+  };
+
+  recognition.onend = () => {
+    isListening = false;
+    voiceBtn.classList.remove('listening');
+    voiceBtn.title = 'Click to speak your search';
+    console.log('Voice recognition ended');
+  };
+}
+
+function toggleVoiceRecognition() {
+  if (!recognition) return;
+  
+  if (isListening) {
+    recognition.stop();
+  } else {
+    recognition.start();
+  }
 }
 
 function handleSearch(event) {

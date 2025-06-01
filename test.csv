@@ -1,4 +1,0 @@
-slug,title,author,date,content
-hello-world,Hello World,Mohan,2025-06-01,"<p>Welcome to my <strong>first blog post</strong> using GitHub-hosted CSV as a CMS backend!</p><p>This is a lightweight CMS powered by GitHub + JavaScript.</p>"
-insurance-update,Insurance Tech Update,Mohan,2025-05-30,"<p>Today we cover how insurance systems like <em>SureOS</em> are transforming B2B insurance operations.</p><ul><li>Plan Migration</li><li>Agreement Handling</li><li>Pricing Logic</li></ul>"
-js-csv-blog,JavaScript CSV Blog Loader,Mohan,2025-06-01,"<p>We show how to parse and render blog posts from a CSV file hosted on GitHub using plain JS.</p><p>This is ideal for quick, low-maintenance blogs.</p>"

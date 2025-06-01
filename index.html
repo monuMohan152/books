@@ -474,7 +474,11 @@
           setupSearchListener();
           setupVoiceRecognition();
         }
-        
+
+        function highlightTerms(text, query) {
+          const regex = new RegExp(`(${query})`, "gi");
+          return text.replace(regex, `<mark>$1</mark>`);
+        }
         async function loadMaterials() {
           const githubCSVUrl = "https://raw.githubusercontent.com/monuMohan152/books/main/Data.csv";
           try {

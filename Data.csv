@@ -52,3 +52,56 @@ Kubernetes Documentation,https://kubernetes.io/docs/,"Kubernetes,Container Orche
 AWS Documentation,https://docs.aws.amazon.com/,"AWS,Cloud Computing,Amazon",Amazon Web Services cloud platform documentation,Cloud Computing,AWS,Amazon,Documentation
 Google Cloud Docs,https://cloud.google.com/docs,"Google Cloud,GCP,Cloud Platform",Google Cloud Platform documentation and guides,Cloud Computing,Google Cloud,GCP,Documentation
 Microsoft Azure Docs,https://docs.microsoft.com/en-us/azure/,"Azure,Microsoft,Cloud Computing",Microsoft Azure cloud computing platform documentation,Cloud Computing,Azure,Microsoft,Documentation
+Selenium WebDriver Docs,https://selenium-python.readthedocs.io/,"Selenium,Web Automation,Testing",Selenium WebDriver Python documentation for web automation,Testing,Selenium,Web Automation,Python
+Jest Testing Framework,https://jestjs.io/docs/getting-started,"Jest,JavaScript Testing,Unit Testing",Jest JavaScript testing framework documentation,Testing,Jest,JavaScript,Unit Testing
+Cypress Testing Docs,https://docs.cypress.io/,"Cypress,End-to-End Testing,JavaScript",Cypress end-to-end testing framework documentation,Testing,Cypress,E2E Testing,JavaScript
+Postman API Testing,https://learning.postman.com/,"Postman,API Testing,REST",Postman API development and testing platform learning center,Testing,API Testing,Postman,REST
+JUnit Testing Guide,https://junit.org/junit5/docs/current/user-guide/,"JUnit,Java Testing,Unit Testing",JUnit Java testing framework user guide,Testing,JUnit,Java,Unit Testing
+Figma Design Tool,https://help.figma.com/,"Figma,UI/UX Design,Prototyping",Figma collaborative design tool documentation,Design,Figma,UI/UX,Prototyping
+Adobe XD Tutorials,https://helpx.adobe.com/xd/tutorials.html,"Adobe XD,UI Design,Prototyping",Adobe XD user experience design tutorials,Design,Adobe XD,UI Design,Prototyping
+Sketch Design Guide,https://www.sketch.com/docs/,"Sketch,Mac Design Tool,UI Design",Sketch vector graphics editor documentation for Mac,Design,Sketch,UI Design,Mac
+Canva Design School,https://designschool.canva.com/,"Canva,Graphic Design,Templates",Canva graphic design tutorials and resources,Design,Canva,Graphic Design,Templates
+TensorFlow Documentation,https://www.tensorflow.org/learn,"TensorFlow,Machine Learning,Google",TensorFlow machine learning platform documentation,Machine Learning,TensorFlow,Google,AI
+PyTorch Tutorials,https://pytorch.org/tutorials/,"PyTorch,Deep Learning,Facebook",PyTorch deep learning framework tutorials,Machine Learning,PyTorch,Deep Learning,Facebook
+Scikit-learn Guide,https://scikit-learn.org/stable/user_guide.html,"Scikit-learn,Machine Learning,Python",Scikit-learn machine learning library user guide,Machine Learning,Python,Scikit-learn,Data Science
+Pandas Documentation,https://pandas.pydata.org/docs/,"Pandas,Data Analysis,Python",Pandas data manipulation and analysis library documentation,Data Science,Pandas,Python,Data Analysis
+NumPy User Guide,https://numpy.org/doc/stable/user/,"NumPy,Scientific Computing,Python",NumPy scientific computing library user guide,Data Science,NumPy,Python,Scientific Computing
+Matplotlib Tutorials,https://matplotlib.org/stable/tutorials/index.html,"Matplotlib,Data Visualization,Python",Matplotlib plotting library tutorials and examples,Data Science,Matplotlib,Python,Visualization
+Jupyter Notebook Docs,https://jupyter-notebook.readthedocs.io/,"Jupyter,Interactive Computing,Python",Jupyter Notebook interactive computing documentation,Data Science,Jupyter,Python,Interactive
+Google Colab Guide,https://colab.research.google.com/notebooks/intro.ipynb,"Google Colab,Cloud Computing,Jupyter",Google Colaboratory cloud-based Jupyter notebook service,Data Science,Google Colab,Cloud,Jupyter
+Tableau Learning,https://www.tableau.com/learn,"Tableau,Data Visualization,Business Intelligence",Tableau data visualization and business intelligence learning resources,Data Science,Tableau,Visualization,Business Intelligence
+Power BI Documentation,https://docs.microsoft.com/en-us/power-bi/,"Power BI,Microsoft,Business Intelligence",Microsoft Power BI business analytics documentation,Data Science,Power BI,Microsoft,Business Intelligence
+Unity Learn Platform,https://learn.unity.com/,"Unity,Game Development,3D Engine",Unity game development engine learning platform,Game Development,Unity,3D Engine,Learning
+Unreal Engine Docs,https://docs.unrealengine.com/,"Unreal Engine,Game Development,Epic Games",Unreal Engine game development documentation,Game Development,Unreal Engine,Epic Games,3D
+Godot Engine Docs,https://docs.godotengine.org/,"Godot,Open Source Game Engine,Indie Games",Godot open source game engine documentation,Game Development,Godot,Open Source,Indie
+Blender Tutorials,https://www.blender.org/support/tutorials/,"Blender,3D Modeling,Animation",Blender 3D creation suite tutorials and documentation,3D Graphics,Blender,3D Modeling,Animation
+Flutter Documentation,https://docs.flutter.dev/,"Flutter,Mobile Development,Google",Flutter mobile app development framework documentation,Mobile Development,Flutter,Google,Cross-Platform
+React Native Docs,https://reactnative.dev/docs/getting-started,"React Native,Mobile Development,Facebook",React Native mobile app development framework documentation,Mobile Development,React Native,Facebook,Cross-Platform
+Android Developer Guide,https://developer.android.com/guide,"Android,Mobile Development,Google",Android mobile app development official guide,Mobile Development,Android,Google,Native
+iOS Developer Docs,https://developer.apple.com/documentation/,"iOS,Mobile Development,Apple",Apple iOS mobile app development documentation,Mobile Development,iOS,Apple,Native
+Swift Programming Guide,https://docs.swift.org/swift-book/,"Swift,Apple Programming,iOS",Swift programming language official guide from Apple,Programming,Swift,Apple,iOS
+Kotlin Documentation,https://kotlinlang.org/docs/,"Kotlin,JetBrains,Android Development",Kotlin programming language documentation,Programming,Kotlin,JetBrains,Android
+Rust Programming Book,https://doc.rust-lang.org/book/,"Rust,Systems Programming,Mozilla",The Rust Programming Language official book,Programming,Rust,Systems Programming,Mozilla
+Go Programming Tour,https://tour.golang.org/,"Go,Google Programming,Backend",A Tour of Go programming language interactive tutorial,Programming,Go,Google,Backend
+Ruby on Rails Guides,https://guides.rubyonrails.org/,"Ruby on Rails,Web Framework,Ruby",Ruby on Rails web application framework guides,Web Development,Ruby on Rails,Ruby,Framework
+PHP Official Manual,https://www.php.net/manual/en/,"PHP,Server-Side Programming,Web Development",PHP server-side scripting language official manual,Programming,PHP,Server-Side,Web Development
+Laravel Documentation,https://laravel.com/docs,"Laravel,PHP Framework,Elegant",Laravel PHP web application framework documentation,Web Development,Laravel,PHP,Framework
+Symfony Documentation,https://symfony.com/doc/current/index.html,"Symfony,PHP Framework,Components",Symfony PHP framework and components documentation,Web Development,Symfony,PHP,Components
+R Programming Tutorial,https://www.r-project.org/other-docs.html,"R Programming,Statistics,Data Analysis",R programming language for statistical computing documentation,Data Science,R Programming,Statistics,Data Analysis
+Julia Documentation,https://docs.julialang.org/en/v1/,"Julia,Scientific Computing,High Performance",Julia high-performance scientific computing language documentation,Programming,Julia,Scientific Computing,High Performance
+Scala Documentation,https://docs.scala-lang.org/,"Scala,Functional Programming,JVM",Scala functional programming language documentation,Programming,Scala,Functional Programming,JVM
+Erlang Documentation,https://www.erlang.org/docs,"Erlang,Concurrent Programming,Fault Tolerant",Erlang concurrent programming language documentation,Programming,Erlang,Concurrent,Fault Tolerant
+Haskell Tutorial,https://www.haskell.org/tutorial/,"Haskell,Pure Functional,Lazy Evaluation",Haskell pure functional programming language tutorial,Programming,Haskell,Functional,Pure
+Clojure Guide,https://clojure.org/guides/getting_started,"Clojure,Lisp,Functional Programming",Clojure dynamic functional programming language guide,Programming,Clojure,Lisp,Functional
+Apache Kafka Docs,https://kafka.apache.org/documentation/,"Apache Kafka,Stream Processing,Messaging",Apache Kafka distributed streaming platform documentation,Distributed Systems,Apache Kafka,Streaming,Messaging
+Apache Spark Docs,https://spark.apache.org/docs/latest/,"Apache Spark,Big Data,Distributed Computing",Apache Spark unified analytics engine documentation,Big Data,Apache Spark,Distributed Computing,Analytics
+Elasticsearch Guide,https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html,"Elasticsearch,Search Engine,Full-Text Search",Elasticsearch distributed search and analytics engine guide,Database,Elasticsearch,Search Engine,Analytics
+Apache Hadoop Docs,https://hadoop.apache.org/docs/,"Apache Hadoop,Big Data,Distributed Storage",Apache Hadoop distributed storage and processing documentation,Big Data,Apache Hadoop,Distributed Storage,MapReduce
+Terraform Documentation,https://www.terraform.io/docs,"Terraform,Infrastructure as Code,HashiCorp",Terraform infrastructure as code tool documentation,DevOps,Terraform,Infrastructure as Code,HashiCorp
+Ansible Documentation,https://docs.ansible.com/,"Ansible,Configuration Management,Automation",Ansible IT automation and configuration management documentation,DevOps,Ansible,Configuration Management,Automation
+Jenkins User Guide,https://www.jenkins.io/doc/,"Jenkins,CI/CD,Continuous Integration",Jenkins automation server user guide and documentation,DevOps,Jenkins,CI/CD,Automation
+GitLab CI/CD Docs,https://docs.gitlab.com/ee/ci/,"GitLab,CI/CD,DevOps Platform",GitLab continuous integration and deployment documentation,DevOps,GitLab,CI/CD,Platform
+CircleCI Documentation,https://circleci.com/docs/,"CircleCI,Continuous Integration,Cloud CI",CircleCI continuous integration and delivery platform documentation,DevOps,CircleCI,CI/CD,Cloud
+Travis CI Documentation,https://docs.travis-ci.com/,"Travis CI,Continuous Integration,Open Source",Travis CI continuous integration service documentation,DevOps,Travis CI,CI/CD,Open Source
+Nginx Documentation,https://nginx.org/en/docs/,"Nginx,Web Server,Reverse Proxy",Nginx web server and reverse proxy documentation,Infrastructure,Nginx,Web Server,Reverse Proxy
+Apache HTTP Server Docs,https://httpd.apache.org/docs/,"Apache,HTTP Server,Web Server",Apache HTTP Server web server documentation,Infrastructure,Apache,HTTP Server,Web Server

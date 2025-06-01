@@ -354,6 +354,23 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+    body {
+      overflow-x: hidden;
+    }
+    
+    .material-card,
+    .material-title,
+    .material-description,
+    .filter-btn {
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+    
+    .material-card {
+      max-width: 100%;
+    }
+
 
     /* Responsive Design */
     @media (max-width: 768px) {

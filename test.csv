@@ -17,7 +17,7 @@
   </div>
 
   <script>
-    const csvUrl = "https://raw.githubusercontent.com/monuMohan152/books/refs/heads/main/BlogData.csv";
+    const csvUrl = "https://raw.githubusercontent.com/monuMohan152/books/refs/heads/main/BlogDataNew.csv";
 
     function getSlugFromPath() {
       const path = window.location.pathname;

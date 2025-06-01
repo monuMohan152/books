@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TechInsights Blog</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CardRewards Hub</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
     * {
@@ -12,329 +12,187 @@
       box-sizing: border-box;
     }
 
-    :root {
-      --primary-color: #2563eb;
-      --primary-dark: #1d4ed8;
-      --secondary-color: #64748b;
-      --accent-color: #f59e0b;
-      --bg-primary: #ffffff;
-      --bg-secondary: #f8fafc;
-      --bg-dark: #0f172a;
-      --text-primary: #1e293b;
-      --text-secondary: #64748b;
-      --text-muted: #94a3b8;
-      --border-color: #e2e8f0;
-      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-      --border-radius: 12px;
-      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       min-height: 100vh;
-      line-height: 1.7;
-      color: var(--text-primary);
+      padding: 2rem 1rem;
+      color: #1e293b;
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 1000px;
       margin: 0 auto;
-      padding: 2rem 1rem;
     }
 
-    /* Header */
     .header {
       text-align: center;
-      margin-bottom: 3rem;
       color: white;
+      margin-bottom: 2rem;
     }
 
-    .blog-title {
-      font-size: 3rem;
+    .header h1 {
+      font-size: 2.5rem;
       font-weight: 800;
       margin-bottom: 0.5rem;
-      background: linear-gradient(45deg, #ffffff, #e2e8f0);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
-    .blog-subtitle {
-      font-size: 1.2rem;
+    .header p {
+      font-size: 1.1rem;
       opacity: 0.9;
-      font-weight: 300;
     }
 
-    /* Navigation */
-    .nav-container {
-      background: var(--bg-primary);
-      border-radius: var(--border-radius);
+    .blog-container {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 2rem;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .sidebar {
+      background: #f8fafc;
       padding: 2rem;
-      margin-bottom: 2rem;
-      box-shadow: var(--shadow-lg);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.2);
+      border-right: 1px solid #e2e8f0;
     }
 
-    .nav-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--text-primary);
+    .sidebar h2 {
+      color: #2563eb;
       margin-bottom: 1.5rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
 
-    .nav-title i {
-      color: var(--primary-color);
+    .post-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
     }
 
-    .post-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .post-card {
-      background: var(--bg-secondary);
-      border-radius: var(--border-radius);
-      padding: 1.5rem;
-      border: 1px solid var(--border-color);
-      transition: var(--transition);
+    .post-item {
+      padding: 1rem;
+      background: white;
+      border-radius: 8px;
       cursor: pointer;
-      position: relative;
-      overflow: hidden;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
     }
 
-    .post-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-      transform: scaleX(0);
-      transition: var(--transition);
+    .post-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+      border-color: #2563eb;
     }
 
-    .post-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
-      border-color: var(--primary-color);
-    }
-
-    .post-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .post-card.active {
-      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    .post-item.active {
+      background: #2563eb;
       color: white;
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
     }
 
-    .post-card.active::before {
-      transform: scaleX(1);
-      background: rgba(255,255,255,0.3);
-    }
-
-    .post-card-title {
-      font-size: 1.1rem;
+    .post-item h3 {
+      font-size: 0.95rem;
       font-weight: 600;
       margin-bottom: 0.5rem;
-      color: inherit;
     }
 
-    .post-card-meta {
-      font-size: 0.85rem;
+    .post-meta {
+      font-size: 0.8rem;
       opacity: 0.7;
       display: flex;
       align-items: center;
       gap: 1rem;
     }
 
-    .post-card-meta i {
-      width: 14px;
-    }
-
-    /* Main Content */
     .main-content {
-      background: var(--bg-primary);
-      border-radius: var(--border-radius);
-      padding: 3rem;
-      box-shadow: var(--shadow-lg);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.2);
-      min-height: 600px;
+      padding: 2rem;
     }
 
-    .post-header {
+    .article-header {
       margin-bottom: 2rem;
-      padding-bottom: 2rem;
-      border-bottom: 2px solid var(--border-color);
-      position: relative;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px solid #e2e8f0;
     }
 
-    .post-header::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-    }
-
-    .post-title {
-      font-size: 2.5rem;
+    .article-title {
+      font-size: 2rem;
       font-weight: 800;
-      color: var(--text-primary);
+      color: #1e293b;
       margin-bottom: 1rem;
-      line-height: 1.2;
     }
 
-    .post-meta {
+    .article-meta {
       display: flex;
       align-items: center;
-      gap: 2rem;
-      color: var(--text-secondary);
-      font-size: 0.95rem;
+      gap: 1.5rem;
+      color: #64748b;
+      font-size: 0.9rem;
     }
 
-    .post-meta-item {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+    .article-meta i {
+      color: #2563eb;
     }
 
-    .post-meta i {
-      color: var(--primary-color);
-      width: 16px;
+    .article-content {
+      font-size: 1.05rem;
+      line-height: 1.7;
     }
 
-    .post-content {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      color: var(--text-primary);
-    }
-
-    .post-content h2 {
-      font-size: 1.8rem;
+    .article-content h2 {
+      font-size: 1.5rem;
       font-weight: 700;
-      margin: 2.5rem 0 1rem 0;
-      color: var(--text-primary);
-      position: relative;
-      padding-left: 1rem;
-    }
-
-    .post-content h2::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0.3rem;
-      width: 4px;
-      height: 1.2rem;
-      background: linear-gradient(180deg, var(--primary-color), var(--accent-color));
-      border-radius: 2px;
-    }
-
-    .post-content h3 {
-      font-size: 1.4rem;
-      font-weight: 600;
       margin: 2rem 0 1rem 0;
-      color: var(--text-primary);
+      color: #1e293b;
+      padding-left: 1rem;
+      border-left: 4px solid #2563eb;
     }
 
-    .post-content p {
-      margin-bottom: 1.5rem;
+    .article-content h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 1.5rem 0 0.5rem 0;
+      color: #374151;
     }
 
-    .post-content ul, .post-content ol {
-      margin: 1rem 0 1.5rem 2rem;
+    .article-content p {
+      margin-bottom: 1.2rem;
     }
 
-    .post-content li {
+    .article-content ul, .article-content ol {
+      margin: 1rem 0 1.2rem 2rem;
+    }
+
+    .article-content li {
       margin-bottom: 0.5rem;
     }
 
-    .post-content strong {
-      color: var(--primary-color);
+    .article-content strong {
+      color: #2563eb;
       font-weight: 600;
     }
 
-    .post-content em {
-      color: var(--text-secondary);
-      font-style: italic;
-    }
-
-    .post-content blockquote {
+    .article-content blockquote {
       background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(245, 158, 11, 0.05));
-      border-left: 4px solid var(--primary-color);
-      padding: 1.5rem 2rem;
-      margin: 2rem 0;
-      border-radius: 0 var(--border-radius) var(--border-radius) 0;
-      font-style: italic;
-      position: relative;
-    }
-
-    .post-content blockquote::before {
-      content: '"';
-      font-size: 4rem;
-      color: var(--primary-color);
-      position: absolute;
-      top: -0.5rem;
-      left: 1rem;
-      opacity: 0.3;
-      font-family: Georgia, serif;
-    }
-
-    .post-content code {
-      background: var(--bg-secondary);
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-      font-size: 0.9rem;
-      color: var(--primary-color);
-      border: 1px solid var(--border-color);
-    }
-
-    .post-content pre {
-      background: var(--bg-dark);
-      color: #e2e8f0;
-      padding: 1.5rem;
-      border-radius: var(--border-radius);
-      overflow-x: auto;
+      border-left: 4px solid #2563eb;
+      padding: 1.2rem 1.5rem;
       margin: 1.5rem 0;
-      border: 1px solid var(--border-color);
-    }
-
-    .post-content pre code {
-      background: none;
-      border: none;
-      color: inherit;
-      padding: 0;
-    }
-
-    /* Loading and Error States */
-    .loading, .error {
-      text-align: center;
-      padding: 4rem 2rem;
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
     }
 
     .loading {
-      color: var(--text-secondary);
+      text-align: center;
+      padding: 3rem;
+      color: #64748b;
     }
 
     .loading i {
       font-size: 2rem;
-      color: var(--primary-color);
+      color: #2563eb;
       animation: spin 1s linear infinite;
       margin-bottom: 1rem;
     }
@@ -343,191 +201,79 @@
       to { transform: rotate(360deg); }
     }
 
-    .error {
-      background: linear-gradient(135deg, rgba(239, 68, 68, 0.05), rgba(239, 68, 68, 0.1));
-      border: 1px solid rgba(239, 68, 68, 0.2);
-      border-radius: var(--border-radius);
-      color: #dc2626;
-    }
-
-    .error h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .error i {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      opacity: 0.5;
-    }
-
-    /* Responsive Design */
     @media (max-width: 768px) {
-      .container {
-        padding: 1rem;
+      .blog-container {
+        grid-template-columns: 1fr;
       }
-
-      .blog-title {
+      
+      .sidebar {
+        border-right: none;
+        border-bottom: 1px solid #e2e8f0;
+      }
+      
+      .header h1 {
         font-size: 2rem;
       }
-
-      .nav-container, .main-content {
-        padding: 1.5rem;
-      }
-
-      .post-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-      }
-
-      .post-title {
-        font-size: 1.8rem;
-      }
-
-      .post-meta {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-      }
-
-      .post-content {
-        font-size: 1rem;
-      }
-
-      .post-content h2 {
+      
+      .article-title {
         font-size: 1.5rem;
       }
-    }
-
-    /* Smooth Animations */
-    .fade-in {
-      animation: fadeIn 0.6s ease-out;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Reading Progress Bar */
-    .progress-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 0%;
-      height: 3px;
-      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-      z-index: 1000;
-      transition: width 0.1s ease;
     }
   </style>
 </head>
 <body>
-  <div class="progress-bar" id="progressBar"></div>
-  
   <div class="container">
     <header class="header">
-      <h1 class="blog-title">TechInsights</h1>
-      <p class="blog-subtitle">Exploring the Future of Technology</p>
+      <h1>CardRewards Hub</h1>
+      <p>Your Ultimate Guide to Credit Card Rewards</p>
     </header>
 
-    <nav class="nav-container">
-      <h2 class="nav-title">
-        <i class="fas fa-newspaper"></i>
-        Latest Articles
-      </h2>
-      <div id="post-navigation" class="post-grid">
-        <div class="loading">
-          <i class="fas fa-spinner"></i>
-          <p>Loading articles...</p>
+    <div class="blog-container">
+      <aside class="sidebar">
+        <h2><i class="fas fa-newspaper"></i> Latest Articles</h2>
+        <div id="post-list" class="post-list">
+          <div class="loading">
+            <i class="fas fa-spinner"></i>
+            <p>Loading articles...</p>
+          </div>
         </div>
-      </div>
-    </nav>
+      </aside>
 
-    <main class="main-content fade-in" id="main-content">
-      <div class="loading">
-        <i class="fas fa-spinner"></i>
-        <p>Loading content...</p>
-      </div>
-    </main>
+      <main class="main-content">
+        <div id="article-content">
+          <div class="loading">
+            <i class="fas fa-spinner"></i>
+            <p>Loading content...</p>
+          </div>
+        </div>
+      </main>
+    </div>
   </div>
 
   <script>
-    const csvUrl = "https://raw.githubusercontent.com/monuMohan152/books/refs/heads/main/BlogDataNew.csv";
-    
-    function getSlugFromPath() {
-      if (window.location.protocol === 'file:') {
-        const urlParams = new URLSearchParams(window.location.search);
-        const slug = urlParams.get('slug');
-        return slug || "welcome";
-      }
+    // Sample CSV data with pipe separators
+    const csvData = `slug|title|author|date|content
+welcome|Welcome to CardRewards Hub - Your Guide to Credit Card Benefits|Sarah Johnson|2024-12-01|<h2>Unlock the Full Potential of Your Credit Cards</h2><p>Welcome to CardRewards Hub, where we transform the complex world of credit card rewards into actionable strategies that put more money back in your pocket. Whether you're a beginner or seasoned rewards enthusiast, you've found your home base.</p><h2>What Makes Us Different</h2><p>In an industry flooded with generic advice, we take a <strong>data-driven approach</strong> to credit card rewards. Our team analyzes spending patterns, reward structures, and market trends to deliver insights that actually matter.</p><blockquote>"The average American leaves over $1,200 in credit card rewards on the table each year."</blockquote><h2>Our Focus Areas</h2><h3>Strategic Card Selection</h3><p>We help you identify cards that align with your specific spending habits, from everyday purchases to major travel expenses.</p><h3>Reward Maximization</h3><p>Learn advanced techniques like category rotation and bonus multipliers to multiply your rewards earnings.</p><h3>Points and Miles Optimization</h3><p>Discover how to transfer points between programs and book premium travel for a fraction of retail cost.</p>
+best-cashback-cards|The Best Cashback Credit Cards for Maximum Returns|Michael Chen|2024-11-28|<h2>Top Cashback Cards That Deliver Real Value</h2><p>Cashback credit cards offer the most straightforward way to earn rewards on everyday spending. Unlike complex points programs, cashback provides immediate, tangible value.</p><h2>Our Top Picks</h2><h3>Best Overall: Citi Double Cash Card</h3><p>The <strong>Citi Double Cash Card</strong> dominates with its simple 2% cashback structure - 1% when you buy, 1% when you pay.</p><ul><li>2% cashback on all purchases</li><li>No annual fee</li><li>0% intro APR for 18 months on balance transfers</li></ul><h3>Best for Categories: Chase Freedom Flex</h3><p>For those willing to track quarterly categories, Chase Freedom Flex offers 5% cashback on rotating categories.</p><ul><li>5% on rotating quarterly categories (up to $1,500)</li><li>3% on dining and drugstores</li><li>1% on all other purchases</li></ul><h2>Maximizing Your Strategy</h2><p>The key isn't just choosing the right card - it's using multiple cards strategically. A well-executed three-card strategy can average 3-4% cashback across all spending.</p>
+travel-rewards-guide|Travel Rewards for Beginners - Your Path to Free Flights|Emma Rodriguez|2024-11-25|<h2>Breaking Into Travel Rewards</h2><p>Travel rewards can seem intimidating, but anyone can start earning free flights and hotel stays with the right approach.</p><h2>Understanding the Basics</h2><h3>Types of Travel Rewards</h3><ul><li><strong>Airline Miles:</strong> Specific to one airline</li><li><strong>Hotel Points:</strong> Redeemable at hotel chains</li><li><strong>Flexible Points:</strong> Transfer to multiple partners</li></ul><p>For beginners, we recommend flexible points programs like Chase Ultimate Rewards.</p><h2>Your First Travel Card</h2><h3>Chase Sapphire Preferred</h3><p>The gold standard for beginners:</p><ul><li>60,000 point welcome bonus</li><li>2x points on travel and dining</li><li>Points transfer to 14 partners</li><li>25% bonus when booking through Chase</li></ul><h2>Earning Your First Free Trip</h2><p>The fastest way is through welcome bonuses. Meet the spending requirement in 3 months, receive your bonus, then book your award trip.</p>
+credit-card-churning|Credit Card Churning - Advanced Strategies for Maximum Bonuses|David Kim|2024-11-22|<h2>The Art of Credit Card Churning</h2><p>Credit card churning involves systematically applying for cards to earn welcome bonuses. Done correctly, it can generate thousands in travel rewards annually.</p><h2>Prerequisites</h2><h3>Credit Score Requirements</h3><ul><li><strong>Minimum:</strong> 720+ FICO score</li><li><strong>Optimal:</strong> 750+ FICO score</li></ul><h3>Financial Discipline</h3><p>You must have discipline to never carry balances and track multiple cards carefully.</p><h2>Understanding Bank Rules</h2><h3>Chase 5/24 Rule</h3><p>Chase denies applications if you've opened 5+ cards in 24 months. This makes Chase cards a priority.</p><h3>American Express Once-Per-Lifetime</h3><p>Amex bonuses are typically once per lifetime per card. Plan carefully.</p><h2>The Churning Strategy</h2><p>Focus on Chase cards first while under 5/24, then branch out to other issuers. Advanced churners can earn 500,000+ points annually.</p>
+business-credit-cards|Business Credit Cards - Maximize Rewards for Your Business|Rachel Park|2024-11-13|<h2>Why Business Cards Matter</h2><p>Business credit cards offer advantages personal cards can't match - from higher earning rates to substantial welcome bonuses.</p><h2>Key Benefits</h2><ul><li><strong>Expense separation:</strong> Keep business and personal separate</li><li><strong>Enhanced categories:</strong> 3-5x on business expenses</li><li><strong>Credit building:</strong> Build business credit independently</li></ul><h2>Top Business Cards</h2><h3>Chase Ink Business Preferred</h3><ul><li>100,000 point welcome bonus</li><li>3x on travel, shipping, internet, phone services</li><li>$95 annual fee</li></ul><h3>Chase Ink Business Unlimited</h3><ul><li>$750 cash back welcome bonus</li><li>1.5% on all purchases</li><li>No annual fee</li></ul><h2>Qualification</h2><p>You don't need a formal corporation - freelancing, consulting, or side hustles all qualify as businesses.</p>`;
+
+    let posts = [];
+    let currentSlug = 'welcome';
+
+    function parseCSV(csvText) {
+      const lines = csvText.trim().split('\n');
+      const headers = lines[0].split('|');
       
-      const path = window.location.pathname;
-      const slug = path.startsWith("/") ? path.slice(1) : path;
-      return slug || "welcome";
-    }
-    
-    async function loadCSV(url) {
-      try {
-        const res = await fetch(url);
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        const text = await res.text();
-        return parseCSV(text);
-      } catch (error) {
-        console.error('Error loading CSV:', error);
-        throw error;
-      }
-    }
-    
-    function parseCSV(text) {
-      try {
-        const lines = text.trim().split('\n');
-        if (lines.length < 2) {
-          throw new Error('CSV must have at least a header and one data row');
-        }
-        
-        const [header, ...dataLines] = lines;
-        const keys = header.split(',').map(key => key.trim().replace(/^"|"$/g, ''));
-        
-        return dataLines.map(line => {
-          const values = [];
-          let current = '';
-          let inQuotes = false;
-          
-          for (let i = 0; i < line.length; i++) {
-            const char = line[i];
-            
-            if (char === '"') {
-              inQuotes = !inQuotes;
-            } else if (char === ',' && !inQuotes) {
-              values.push(current.trim().replace(/^"|"$/g, ''));
-              current = '';
-            } else {
-              current += char;
-            }
-          }
-          
-          values.push(current.trim().replace(/^"|"$/g, ''));
-          
-          const obj = {};
-          keys.forEach((key, index) => {
-            obj[key] = values[index] || '';
-          });
-          
-          return obj;
+      return lines.slice(1).map(line => {
+        const values = line.split('|');
+        const post = {};
+        headers.forEach((header, index) => {
+          post[header] = values[index] || '';
         });
-      } catch (error) {
-        console.error('Error parsing CSV:', error);
-        throw error;
-      }
+        return post;
+      });
     }
 
     function formatDate(dateString) {
@@ -544,139 +290,67 @@
     }
 
     function estimateReadingTime(content) {
-      const wordsPerMinute = 200;
       const textContent = content.replace(/<[^>]*>/g, '');
       const wordCount = textContent.split(/\s+/).length;
-      const minutes = Math.ceil(wordCount / wordsPerMinute);
+      const minutes = Math.ceil(wordCount / 200);
       return `${minutes} min read`;
     }
-    
-    async function renderNavigation(posts, currentSlug) {
-      const navEl = document.getElementById("post-navigation");
+
+    function renderPostList() {
+      const postListEl = document.getElementById('post-list');
       
-      navEl.innerHTML = posts.map(post => `
-        <div class="post-card ${post.slug === currentSlug ? 'active' : ''}" onclick="navigateToPost('${post.slug}')">
-          <h3 class="post-card-title">${post.title || 'Untitled Post'}</h3>
-          <div class="post-card-meta">
-            <span><i class="fas fa-user"></i>${post.author || 'Unknown'}</span>
-            <span><i class="fas fa-calendar"></i>${formatDate(post.date)}</span>
-            <span><i class="fas fa-clock"></i>${estimateReadingTime(post.content)}</span>
+      postListEl.innerHTML = posts.map(post => `
+        <div class="post-item ${post.slug === currentSlug ? 'active' : ''}" onclick="selectPost('${post.slug}')">
+          <h3>${post.title}</h3>
+          <div class="post-meta">
+            <span><i class="fas fa-user"></i> ${post.author}</span>
+            <span><i class="fas fa-calendar"></i> ${formatDate(post.date)}</span>
           </div>
         </div>
       `).join('');
     }
 
-    function navigateToPost(slug) {
-      const newUrl = window.location.protocol === 'file:' 
-        ? `${window.location.pathname}?slug=${slug}`
-        : `/${slug}`;
+    function renderArticle() {
+      const articleEl = document.getElementById('article-content');
+      const post = posts.find(p => p.slug === currentSlug);
       
-      if (window.location.protocol === 'file:') {
-        window.location.search = `?slug=${slug}`;
-      } else {
-        window.history.pushState({}, '', newUrl);
-        renderPost();
+      if (!post) {
+        articleEl.innerHTML = '<div class="loading"><p>Article not found</p></div>';
+        return;
       }
-    }
-    
-    async function renderPost() {
-      const mainEl = document.getElementById("main-content");
-      
-      try {
-        const currentSlug = getSlugFromPath();
-        console.log('Looking for slug:', currentSlug);
-        
-        const posts = await loadCSV(csvUrl);
-        console.log('Loaded posts:', posts);
-        
-        // Render navigation
-        await renderNavigation(posts, currentSlug);
-        
-        // Find current post
-        const post = posts.find(p => p.slug === currentSlug);
-        
-        if (!post) {
-          mainEl.innerHTML = `
-            <div class="error">
-              <i class="fas fa-exclamation-triangle"></i>
-              <h1>Article Not Found</h1>
-              <p>The article "${currentSlug}" could not be found.</p>
-              <p>Please select an article from the navigation above.</p>
+
+      articleEl.innerHTML = `
+        <article>
+          <header class="article-header">
+            <h1 class="article-title">${post.title}</h1>
+            <div class="article-meta">
+              <span><i class="fas fa-user"></i> ${post.author}</span>
+              <span><i class="fas fa-calendar"></i> ${formatDate(post.date)}</span>
+              <span><i class="fas fa-clock"></i> ${estimateReadingTime(post.content)}</span>
             </div>
-          `;
-          return;
-        }
-        
-        mainEl.innerHTML = `
-          <article class="fade-in">
-            <header class="post-header">
-              <h1 class="post-title">${post.title || 'Untitled Post'}</h1>
-              <div class="post-meta">
-                <div class="post-meta-item">
-                  <i class="fas fa-user"></i>
-                  <span>${post.author || 'Unknown Author'}</span>
-                </div>
-                <div class="post-meta-item">
-                  <i class="fas fa-calendar"></i>
-                  <span>${formatDate(post.date)}</span>
-                </div>
-                <div class="post-meta-item">
-                  <i class="fas fa-clock"></i>
-                  <span>${estimateReadingTime(post.content)}</span>
-                </div>
-              </div>
-            </header>
-            <div class="post-content">${post.content || 'No content available'}</div>
-          </article>
-        `;
-
-        // Update page title
-        document.title = `${post.title} - TechInsights Blog`;
-        
-        // Initialize reading progress
-        initReadingProgress();
-        
-      } catch (error) {
-        console.error('Error rendering post:', error);
-        mainEl.innerHTML = `
-          <div class="error">
-            <i class="fas fa-exclamation-circle"></i>
-            <h1>Error Loading Content</h1>
-            <p>There was an error loading the blog content: ${error.message}</p>
-            <p>Please check your internet connection and try again.</p>
-          </div>
-        `;
-      }
+          </header>
+          <div class="article-content">${post.content}</div>
+        </article>
+      `;
     }
 
-    function initReadingProgress() {
-      const progressBar = document.getElementById('progressBar');
-      const article = document.querySelector('article');
-      
-      if (!article) return;
-
-      function updateProgress() {
-        const scrollTop = window.scrollY;
-        const docHeight = article.offsetHeight;
-        const winHeight = window.innerHeight;
-        const scrollPercent = scrollTop / (docHeight - winHeight);
-        const scrollPercentRounded = Math.round(scrollPercent * 100);
-        
-        progressBar.style.width = Math.min(scrollPercentRounded, 100) + '%';
-      }
-
-      window.addEventListener('scroll', updateProgress);
-      updateProgress();
+    function selectPost(slug) {
+      currentSlug = slug;
+      renderPostList();
+      renderArticle();
     }
-    
-    // Handle browser back/forward buttons
-    window.addEventListener('popstate', renderPost);
-    
-    // Initialize
+
+    function init() {
+      posts = parseCSV(csvData);
+      renderPostList();
+      renderArticle();
+    }
+
+    // Initialize when page loads
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', renderPost);
+      document.addEventListener('DOMContentLoaded', init);
     } else {
-      renderPost();
+      init();
     }
   </script>
 </body>

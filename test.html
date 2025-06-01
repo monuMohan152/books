@@ -3,61 +3,681 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Blog CMS</title>
+  <title>TechInsights Blog</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
-    body { font-family: Arial, sans-serif; margin: 2rem; }
-    .blog-post { max-width: 800px; margin: auto; }
-    h1 { font-size: 2rem; margin-bottom: 0.5rem; }
-    .meta { color: gray; font-size: 0.9rem; margin-bottom: 1rem; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-color: #2563eb;
+      --primary-dark: #1d4ed8;
+      --secondary-color: #64748b;
+      --accent-color: #f59e0b;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-dark: #0f172a;
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --text-muted: #94a3b8;
+      --border-color: #e2e8f0;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --border-radius: 12px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      line-height: 1.7;
+      color: var(--text-primary);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 3rem;
+      color: white;
+    }
+
+    .blog-title {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(45deg, #ffffff, #e2e8f0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .blog-subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      font-weight: 300;
+    }
+
+    /* Navigation */
+    .nav-container {
+      background: var(--bg-primary);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-lg);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .nav-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-title i {
+      color: var(--primary-color);
+    }
+
+    .post-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .post-card {
+      background: var(--bg-secondary);
+      border-radius: var(--border-radius);
+      padding: 1.5rem;
+      border: 1px solid var(--border-color);
+      transition: var(--transition);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .post-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      transform: scaleX(0);
+      transition: var(--transition);
+    }
+
+    .post-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary-color);
+    }
+
+    .post-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .post-card.active {
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      color: white;
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .post-card.active::before {
+      transform: scaleX(1);
+      background: rgba(255,255,255,0.3);
+    }
+
+    .post-card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: inherit;
+    }
+
+    .post-card-meta {
+      font-size: 0.85rem;
+      opacity: 0.7;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .post-card-meta i {
+      width: 14px;
+    }
+
+    /* Main Content */
+    .main-content {
+      background: var(--bg-primary);
+      border-radius: var(--border-radius);
+      padding: 3rem;
+      box-shadow: var(--shadow-lg);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      min-height: 600px;
+    }
+
+    .post-header {
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 2px solid var(--border-color);
+      position: relative;
+    }
+
+    .post-header::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    }
+
+    .post-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .post-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .post-meta i {
+      color: var(--primary-color);
+      width: 16px;
+    }
+
+    .post-content {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--text-primary);
+    }
+
+    .post-content h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 2.5rem 0 1rem 0;
+      color: var(--text-primary);
+      position: relative;
+      padding-left: 1rem;
+    }
+
+    .post-content h2::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.3rem;
+      width: 4px;
+      height: 1.2rem;
+      background: linear-gradient(180deg, var(--primary-color), var(--accent-color));
+      border-radius: 2px;
+    }
+
+    .post-content h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin: 2rem 0 1rem 0;
+      color: var(--text-primary);
+    }
+
+    .post-content p {
+      margin-bottom: 1.5rem;
+    }
+
+    .post-content ul, .post-content ol {
+      margin: 1rem 0 1.5rem 2rem;
+    }
+
+    .post-content li {
+      margin-bottom: 0.5rem;
+    }
+
+    .post-content strong {
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
+    .post-content em {
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
+    .post-content blockquote {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(245, 158, 11, 0.05));
+      border-left: 4px solid var(--primary-color);
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      font-style: italic;
+      position: relative;
+    }
+
+    .post-content blockquote::before {
+      content: '"';
+      font-size: 4rem;
+      color: var(--primary-color);
+      position: absolute;
+      top: -0.5rem;
+      left: 1rem;
+      opacity: 0.3;
+      font-family: Georgia, serif;
+    }
+
+    .post-content code {
+      background: var(--bg-secondary);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--primary-color);
+      border: 1px solid var(--border-color);
+    }
+
+    .post-content pre {
+      background: var(--bg-dark);
+      color: #e2e8f0;
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      border: 1px solid var(--border-color);
+    }
+
+    .post-content pre code {
+      background: none;
+      border: none;
+      color: inherit;
+      padding: 0;
+    }
+
+    /* Loading and Error States */
+    .loading, .error {
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+
+    .loading {
+      color: var(--text-secondary);
+    }
+
+    .loading i {
+      font-size: 2rem;
+      color: var(--primary-color);
+      animation: spin 1s linear infinite;
+      margin-bottom: 1rem;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .error {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.05), rgba(239, 68, 68, 0.1));
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      border-radius: var(--border-radius);
+      color: #dc2626;
+    }
+
+    .error h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .error i {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+
+      .blog-title {
+        font-size: 2rem;
+      }
+
+      .nav-container, .main-content {
+        padding: 1.5rem;
+      }
+
+      .post-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .post-title {
+        font-size: 1.8rem;
+      }
+
+      .post-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+
+      .post-content {
+        font-size: 1rem;
+      }
+
+      .post-content h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* Smooth Animations */
+    .fade-in {
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Reading Progress Bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      z-index: 1000;
+      transition: width 0.1s ease;
+    }
   </style>
 </head>
 <body>
-  <div id="blog" class="blog-post">
-    <p>Loading post...</p>
+  <div class="progress-bar" id="progressBar"></div>
+  
+  <div class="container">
+    <header class="header">
+      <h1 class="blog-title">TechInsights</h1>
+      <p class="blog-subtitle">Exploring the Future of Technology</p>
+    </header>
+
+    <nav class="nav-container">
+      <h2 class="nav-title">
+        <i class="fas fa-newspaper"></i>
+        Latest Articles
+      </h2>
+      <div id="post-navigation" class="post-grid">
+        <div class="loading">
+          <i class="fas fa-spinner"></i>
+          <p>Loading articles...</p>
+        </div>
+      </div>
+    </nav>
+
+    <main class="main-content fade-in" id="main-content">
+      <div class="loading">
+        <i class="fas fa-spinner"></i>
+        <p>Loading content...</p>
+      </div>
+    </main>
   </div>
 
   <script>
     const csvUrl = "https://raw.githubusercontent.com/monuMohan152/books/refs/heads/main/BlogDataNew.csv";
-
+    
     function getSlugFromPath() {
+      if (window.location.protocol === 'file:') {
+        const urlParams = new URLSearchParams(window.location.search);
+        const slug = urlParams.get('slug');
+        return slug || "welcome";
+      }
+      
       const path = window.location.pathname;
-      return path.startsWith("/") ? path.slice(1) : path;
+      const slug = path.startsWith("/") ? path.slice(1) : path;
+      return slug || "welcome";
     }
-
+    
     async function loadCSV(url) {
-      const res = await fetch(url);
-      const text = await res.text();
-      return parseCSV(text);
+      try {
+        const res = await fetch(url);
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        const text = await res.text();
+        return parseCSV(text);
+      } catch (error) {
+        console.error('Error loading CSV:', error);
+        throw error;
+      }
     }
-
+    
     function parseCSV(text) {
-      const [header, ...lines] = text.trim().split("\n");
-      const keys = header.split(",");
-      return lines.map(line => {
-        const values = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g).map(v => v.replace(/^"|"$/g, ""));
-        return Object.fromEntries(keys.map((k, i) => [k.trim(), values[i]?.trim() || ""]));
-      });
+      try {
+        const lines = text.trim().split('\n');
+        if (lines.length < 2) {
+          throw new Error('CSV must have at least a header and one data row');
+        }
+        
+        const [header, ...dataLines] = lines;
+        const keys = header.split(',').map(key => key.trim().replace(/^"|"$/g, ''));
+        
+        return dataLines.map(line => {
+          const values = [];
+          let current = '';
+          let inQuotes = false;
+          
+          for (let i = 0; i < line.length; i++) {
+            const char = line[i];
+            
+            if (char === '"') {
+              inQuotes = !inQuotes;
+            } else if (char === ',' && !inQuotes) {
+              values.push(current.trim().replace(/^"|"$/g, ''));
+              current = '';
+            } else {
+              current += char;
+            }
+          }
+          
+          values.push(current.trim().replace(/^"|"$/g, ''));
+          
+          const obj = {};
+          keys.forEach((key, index) => {
+            obj[key] = values[index] || '';
+          });
+          
+          return obj;
+        });
+      } catch (error) {
+        console.error('Error parsing CSV:', error);
+        throw error;
+      }
     }
 
-    async function renderPost() {
-      const slug = getSlugFromPath();
-      const posts = await loadCSV(csvUrl);
-      const post = posts.find(p => p.slug === slug);
+    function formatDate(dateString) {
+      try {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+      } catch {
+        return dateString;
+      }
+    }
 
-      const blogEl = document.getElementById("blog");
-      if (!post) {
-        blogEl.innerHTML = `<h1>404 - Post Not Found</h1>`;
-        return;
+    function estimateReadingTime(content) {
+      const wordsPerMinute = 200;
+      const textContent = content.replace(/<[^>]*>/g, '');
+      const wordCount = textContent.split(/\s+/).length;
+      const minutes = Math.ceil(wordCount / wordsPerMinute);
+      return `${minutes} min read`;
+    }
+    
+    async function renderNavigation(posts, currentSlug) {
+      const navEl = document.getElementById("post-navigation");
+      
+      navEl.innerHTML = posts.map(post => `
+        <div class="post-card ${post.slug === currentSlug ? 'active' : ''}" onclick="navigateToPost('${post.slug}')">
+          <h3 class="post-card-title">${post.title || 'Untitled Post'}</h3>
+          <div class="post-card-meta">
+            <span><i class="fas fa-user"></i>${post.author || 'Unknown'}</span>
+            <span><i class="fas fa-calendar"></i>${formatDate(post.date)}</span>
+            <span><i class="fas fa-clock"></i>${estimateReadingTime(post.content)}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function navigateToPost(slug) {
+      const newUrl = window.location.protocol === 'file:' 
+        ? `${window.location.pathname}?slug=${slug}`
+        : `/${slug}`;
+      
+      if (window.location.protocol === 'file:') {
+        window.location.search = `?slug=${slug}`;
+      } else {
+        window.history.pushState({}, '', newUrl);
+        renderPost();
+      }
+    }
+    
+    async function renderPost() {
+      const mainEl = document.getElementById("main-content");
+      
+      try {
+        const currentSlug = getSlugFromPath();
+        console.log('Looking for slug:', currentSlug);
+        
+        const posts = await loadCSV(csvUrl);
+        console.log('Loaded posts:', posts);
+        
+        // Render navigation
+        await renderNavigation(posts, currentSlug);
+        
+        // Find current post
+        const post = posts.find(p => p.slug === currentSlug);
+        
+        if (!post) {
+          mainEl.innerHTML = `
+            <div class="error">
+              <i class="fas fa-exclamation-triangle"></i>
+              <h1>Article Not Found</h1>
+              <p>The article "${currentSlug}" could not be found.</p>
+              <p>Please select an article from the navigation above.</p>
+            </div>
+          `;
+          return;
+        }
+        
+        mainEl.innerHTML = `
+          <article class="fade-in">
+            <header class="post-header">
+              <h1 class="post-title">${post.title || 'Untitled Post'}</h1>
+              <div class="post-meta">
+                <div class="post-meta-item">
+                  <i class="fas fa-user"></i>
+                  <span>${post.author || 'Unknown Author'}</span>
+                </div>
+                <div class="post-meta-item">
+                  <i class="fas fa-calendar"></i>
+                  <span>${formatDate(post.date)}</span>
+                </div>
+                <div class="post-meta-item">
+                  <i class="fas fa-clock"></i>
+                  <span>${estimateReadingTime(post.content)}</span>
+                </div>
+              </div>
+            </header>
+            <div class="post-content">${post.content || 'No content available'}</div>
+          </article>
+        `;
+
+        // Update page title
+        document.title = `${post.title} - TechInsights Blog`;
+        
+        // Initialize reading progress
+        initReadingProgress();
+        
+      } catch (error) {
+        console.error('Error rendering post:', error);
+        mainEl.innerHTML = `
+          <div class="error">
+            <i class="fas fa-exclamation-circle"></i>
+            <h1>Error Loading Content</h1>
+            <p>There was an error loading the blog content: ${error.message}</p>
+            <p>Please check your internet connection and try again.</p>
+          </div>
+        `;
+      }
+    }
+
+    function initReadingProgress() {
+      const progressBar = document.getElementById('progressBar');
+      const article = document.querySelector('article');
+      
+      if (!article) return;
+
+      function updateProgress() {
+        const scrollTop = window.scrollY;
+        const docHeight = article.offsetHeight;
+        const winHeight = window.innerHeight;
+        const scrollPercent = scrollTop / (docHeight - winHeight);
+        const scrollPercentRounded = Math.round(scrollPercent * 100);
+        
+        progressBar.style.width = Math.min(scrollPercentRounded, 100) + '%';
       }
 
-      blogEl.innerHTML = `
-        <h1>${post.title}</h1>
-        <div class="meta">By ${post.author} on ${post.date}</div>
-        <div class="content">${post.content}</div>
-      `;
+      window.addEventListener('scroll', updateProgress);
+      updateProgress();
     }
-
-    renderPost();
+    
+    // Handle browser back/forward buttons
+    window.addEventListener('popstate', renderPost);
+    
+    // Initialize
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', renderPost);
+    } else {
+      renderPost();
+    }
   </script>
 </body>
 </html>

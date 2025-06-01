@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TechBlog - Dynamic Content Hub</title>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+    <style>
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+    
+        body {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+          min-height: 100vh;
+          color: #1a202c;
+          animation: gradientShift 15s ease infinite;
+        }
+    
+        @keyframes gradientShift {
+          0%, 100% { background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); }
+          33% { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 50%, #43e97b 100%); }
+          66% { background: linear-gradient(135deg, #fa709a 0%, #fee140 50%, #667eea 100%); }
+        }
+    
+        .container {
+          position: relative;
+          z-index: 1;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 20px;
+        }
+
+        .blog-header {
+          text-align: center;
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(25px);
+          padding: 50px 40px;
+          border-radius: 30px;
+          box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+          margin-bottom: 40px;
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .blog-header::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 6px;
+          background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #667eea);
+          background-size: 400% 100%;
+          animation: gradientMove 8s ease infinite;
+        }
+
+        @keyframes gradientMove {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+    
+        .blog-header h1 {
+          font-size: 3.5rem;
+          background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          font-weight: 900;
+          margin-bottom: 20px;
+          letter-spacing: -0.03em;
+          text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    
+        .blog-tagline {
+          font-size: 1.3rem;
+          color: #64748b;
+          margin-bottom: 35px;
+          font-weight: 500;
+          line-height: 1.5;
+        }
+
+        .search-filter-section {
+          display: flex;
+          gap: 20px;
+          align-items: center;
+          justify-content: center;
+          flex-wrap: wrap;
+          margin-bottom: 30px;
+        }
+    
+        .search-container {
+          position: relative;
+          flex: 1;
+          max-width: 500px;
+          min-width: 280px;
+        }
+    
+        .search-box {
+          width: 100%;
+          padding: 18px 60px 18px 25px;
+          border-radius: 20px;
+          border: 2px solid rgba(102, 126, 234, 0.2);
+          font-size: 1.1rem;
+          background: rgba(255, 255, 255, 0.9);
+          backdrop-filter: blur(15px);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+          transition: all 0.3s ease;
+          outline: none;
+        }
+    
+        .search-box:focus {
+          border-color: #667eea;
+          box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+          transform: translateY(-2px);
+        }
+    
+        .search-icon {
+          position: absolute;
+          right: 20px;
+          top: 50%;
+          transform: translateY(-50%);
+          font-size: 1.4rem;
+          color: #667eea;
+        }
+
+        .category-filter {
+          padding: 15px 25px;
+          border: 2px solid rgba(102, 126, 234, 0.3);
+          border-radius: 15px;
+          background: rgba(255, 255, 255, 0.9);
+          backdrop-filter: blur(15px);
+          color: #667eea;
+          font-weight: 600;
+          font-size: 1rem;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          outline: none;
+          min-width: 120px;
+        }
+
+        .category-filter:hover, .category-filter:focus {
+          background: linear-gradient(135deg, #667eea, #764ba2);
+          color: white;
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+          border-color: transparent;
+        }
+
+        .blog-stats {
+          display: flex;
+          justify-content: space-around;
+          background: rgba(255, 255, 255, 0.15);
+          backdrop-filter: blur(25px);
+          padding: 25px;
+          border-radius: 25px;
+          margin-bottom: 40px;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-item {
+          text-align: center;
+          color: white;
+        }
+
+        .stat-number {
+          font-size: 2.5rem;
+          font-weight: 800;
+          margin-bottom: 5px;
+          text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .stat-label {
+          font-size: 1rem;
+          font-weight: 500;
+          opacity: 0.9;
+        }
+
+        .blog-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+          gap: 30px;
+          margin-top: 40px;
+        }
+
+        .blog-post {
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(25px);
+          border-radius: 25px;
+          overflow: hidden;
+          box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+          transition: all 0.4s ease;
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          position: relative;
+        }
+
+        .blog-post::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 5px;
+          background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+          opacity: 0;
+          transition: opacity 0.3s ease;
+        }
+
+        .blog-post:hover::before {
+          opacity: 1;
+        }
+
+        .blog-post:hover {
+          transform: translateY(-10px) scale(1.02);
+          box-shadow: 0 35px 70px rgba(0, 0, 0, 0.15);
+        }
+
+        .post-header {
+          padding: 30px 30px 20px;
+          position: relative;
+        }
+
+        .post-meta {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          margin-bottom: 15px;
+          font-size: 0.9rem;
+          color: #64748b;
+        }
+
+        .post-date {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+        }
+
+        .post-author {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+        }
+
+        .post-read-time {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          margin-left: auto;
+        }
+
+        .post-title {
+          font-size: 1.4rem;
+          font-weight: 700;
+          margin-bottom: 15px;
+          color: #1a202c;
+          line-height: 1.4;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+
+        .post-excerpt {
+          font-size: 1rem;
+          color: #64748b;
+          line-height: 1.6;
+          margin-bottom: 20px;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+
+        .post-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+          margin-bottom: 25px;
+        }
+
+        .tag {
+          background: linear-gradient(135deg, #667eea, #764ba2);
+          color: white;
+          padding: 6px 12px;
+          border-radius: 12px;
+          font-size: 0.8rem;
+          font-weight: 600;
+          text-transform: capitalize;
+          letter-spacing: 0.3px;
+        }
+
+        .post-footer {
+          padding: 0 30px 30px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .read-more-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: linear-gradient(135deg, #667eea, #764ba2);
+          color: white;
+          padding: 12px 20px;
+          border-radius: 15px;
+          text-decoration: none;
+          font-weight: 600;
+          font-size: 0.95rem;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .read-more-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+          background: linear-gradient(135deg, #5a67d8, #6b46c1);
+        }
+
+        .post-category {
+          background: rgba(102, 126, 234, 0.1);
+          color: #667eea;
+          padding: 8px 15px;
+          border-radius: 12px;
+          font-size: 0.85rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+
+        .loading, .no-results {
+          text-align: center;
+          color: white;
+          padding: 80px 20px;
+        }
+
+        .loading h3, .no-results h3 {
+          font-size: 1.8rem;
+          margin-bottom: 15px;
+          font-weight: 700;
+        }
+
+        .loading p, .no-results p {
+          font-size: 1.2rem;
+          opacity: 0.9;
+          line-height: 1.5;
+        }
+
+        .spinner {
+          width: 60px;
+          height: 60px;
+          border: 5px solid rgba(255, 255, 255, 0.3);
+          border-top: 5px solid white;
+          border-radius: 50%;
+          animation: spin 1.2s linear infinite;
+          margin: 0 auto 30px;
+        }
+
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+
+        .refresh-btn {
+          position: fixed;
+          bottom: 30px;
+          right: 30px;
+          background: linear-gradient(135deg, #667eea, #764ba2);
+          color: white;
+          border: none;
+          border-radius: 50%;
+          width: 60px;
+          height: 60px;
+          font-size: 1.5rem;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+          z-index: 1000;
+        }
+
+        .refresh-btn:hover {
+          transform: scale(1.1) rotate(180deg);
+          box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+          .blog-header h1 {
+            font-size: 2.5rem;
+          }
+          
+          .blog-tagline {
+            font-size: 1.1rem;
+          }
+
+          .search-filter-section {
+            flex-direction: column;
+            gap: 15px;
+          }
+          
+          .blog-grid {
+            grid-template-columns: 1fr;
+            gap: 25px;
+          }
+
+          .blog-stats {
+            flex-direction: column;
+            gap: 20px;
+          }
+
+          .post-header {
+            padding: 25px 25px 15px;
+          }
+
+          .post-footer {
+            padding: 0 25px 25px;
+            flex-direction: column;
+            gap: 15px;
+            align-items: stretch;
+          }
+
+          .refresh-btn {
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            font-size: 1.3rem;
+          }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="particles-js" style="position: fixed; width: 100%; height: 100%; z-index: -1;"></div>
+    
+    <div class="container">
+        <div class="blog-header">
+            <h1>🚀 TechBlog</h1>
+            <p class="blog-tagline">Discover cutting-edge insights, tutorials, and industry trends</p>
+            
+            <div class="search-filter-section">
+                <div class="search-container">
+                    <input type="text" id="searchBox" class="search-box" placeholder="Search articles, topics, or authors...">
+                    <span class="search-icon">🔍</span>
+                </div>
+                
+                <select id="categoryFilter" class="category-filter">
+                    <option value="all">All Categories</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="blog-stats">
+            <div class="stat-item">
+                <div class="stat-number" id="totalPosts">0</div>
+                <div class="stat-label">Articles</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="totalCategories">0</div>
+                <div class="stat-label">Categories</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="avgReadTime">0</div>
+                <div class="stat-label">Avg Read Time</div>
+            </div>
+        </div>
+
+        <div id="blogContainer">
+            <div class="loading">
+                <div class="spinner"></div>
+                <h3>Loading Blog Posts</h3>
+                <p>Fetching the latest articles and insights...</p>
+            </div>
+        </div>
+    </div>
+
+    <button onclick="reloadBlog()" class="refresh-btn" title="Refresh Blog">
+        🔄
+    </button>
+
+    <script>
+        let blogPosts = [];
+        let filteredPosts = [];
+        let currentCategory = 'all';
+        
+        function init() {
+          loadBlogPosts();
+          setupSearchListener();
+        }
+        
+        async function loadBlogPosts() {
+          // Using the same GitHub CSV URL structure as the original
+          const githubCSVUrl = "https://raw.githubusercontent.com/monuMohan152/books/main/BlogData.csv";
+          try {
+            showLoading();
+            const response = await fetch(githubCSVUrl);
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const csvData = await response.text();
+            blogPosts = parseCSVData(csvData);
+            console.log(`Loaded ${blogPosts.length} blog posts`);
+          } catch (error) {
+            console.error('Failed to load CSV from GitHub:', error);
+            // Fallback to demo data if CSV fails
+            blogPosts = getDemoData();
+            console.log('Using demo data');
+          }
+        
+          generateCategoryFilter();
+          filteredPosts = [...blogPosts];
+          displayBlogPosts();
+          updateStats();
+        }
+        
+        function showLoading() {
+          const container = document.getElementById('blogContainer');
+          container.innerHTML = `
+            <div class="loading">
+              <div class="spinner"></div>
+              <h3>Loading Blog Posts</h3>
+              <p>Fetching the latest articles and insights...</p>
+            </div>
+          `;
+        }
+        
+        function parseCSVData(data) {
+          const lines = data.trim().split("\n");
+          if (lines.length === 0) return getDemoData();
+          
+          const headers = lines[0].split(",").map(h => h.trim().replace(/"/g, ''));
+          console.log('CSV Headers:', headers);
+        
+          const posts = lines.slice(1).map((line, index) => {
+            try {
+              const values = parseCSVLine(line);
+              const entry = {};
+              
+              headers.forEach((header, idx) => {
+                entry[header] = values[idx] || '';
+              });
+        
+              return {
+                title: entry["Title"] || `Blog Post ${index + 1}`,
+                excerpt: entry["Excerpt"] || entry["Summary"] || "Click to read this interesting article...",
+                content: entry["Content"] || entry["Full_Content"] || "",
+                author: entry["Author"] || "Anonymous",
+                category: entry["Category"] || "General",
+                tags: (entry["Tags"] || "").split("|").filter(tag => tag.trim()),
+                publishDate: entry["Publish_Date"] || entry["Date"] || new Date().toISOString().split('T')[0],
+                readTime: parseInt(entry["Read_Time_Minutes"]) || Math.floor(Math.random() * 10) + 3,
+                url: entry["URL"] || entry["Link"] || "#",
+                featured: entry["Featured"] === "true" || entry["Featured"] === "1",
+                status: entry["Status"] || "published"
+              };
+            } catch (error) {
+              console.warn(`Error parsing line ${index + 1}:`, error);
+              return null;
+            }
+          }).filter(post => post !== null && post.status === "published");
+
+          return posts.length > 0 ? posts : getDemoData();
+        }
+        
+        function parseCSVLine(line) {
+          const values = [];
+          let current = '';
+          let inQuotes = false;
+          
+          for (let i = 0; i < line.length; i++) {
+            const char = line[i];
+            
+            if (char === '"') {
+              inQuotes = !inQuotes;
+            } else if (char === ',' && !inQuotes) {
+              values.push(current.trim().replace(/"/g, ''));
+              current = '';
+            } else {
+              current += char;
+            }
+          }
+          
+          values.push(current.trim().replace(/"/g, ''));
+          return values;
+        }
+
+        function getDemoData() {
+          return [
+            {
+              title: "The Future of Web Development: Trends to Watch in 2025",
+              excerpt: "Explore the cutting-edge technologies and frameworks that are reshaping how we build web applications, from AI integration to advanced performance optimization.",
+              author: "Sarah Chen",
+              category: "Web Development",
+              tags: ["JavaScript", "AI", "Performance", "Trends"],
+              publishDate: "2024-12-15",
+              readTime: 8,
+              url: "#",
+              featured: true
+            },
+            {
+              title: "Mastering React Server Components: A Complete Guide",
+              excerpt: "Dive deep into React's Server Components architecture and learn how to build more efficient, scalable applications with improved performance.",
+              author: "Mike Rodriguez",
+              category: "React",
+              tags: ["React", "Server Components", "Performance", "SSR"],
+              publishDate: "2024-12-10",
+              readTime: 12,
+              url: "#",
+              featured: false
+            },
+            {
+              title: "CSS Grid vs Flexbox: When to Use Which Layout System",
+              excerpt: "A comprehensive comparison of CSS Grid and Flexbox, with practical examples and best practices for modern responsive design.",
+              author: "Emily Johnson",
+              category: "CSS",
+              tags: ["CSS", "Grid", "Flexbox", "Layout"],
+              publishDate: "2024-12-08",
+              readTime: 6,
+              url: "#",
+              featured: false
+            },
+            {
+              title: "Building Scalable APIs with Node.js and TypeScript",
+              excerpt: "Learn how to architect robust, type-safe APIs using Node.js and TypeScript, with focus on scalability and maintainability.",
+              author: "David Kim",
+              category: "Backend",
+              tags: ["Node.js", "TypeScript", "API", "Scalability"],
+              publishDate: "2024-12-05",
+              readTime: 10,
+              url: "#",
+              featured: true
+            }
+          ];
+        }
+        
+        function generateCategoryFilter() {
+          const categories = new Set();
+          blogPosts.forEach(post => {
+            if (post.category && post.category.trim()) {
+              categories.add(post.category.trim());
+            }
+          });
+
+          const filterSelect = document.getElementById('categoryFilter');
+          filterSelect.innerHTML = '<option value="all">All Categories</option>';
+          
+          Array.from(categories).sort().forEach(category => {
+            const option = document.createElement('option');
+            option.value = category;
+            option.textContent = category;
+            filterSelect.appendChild(option);
+          });
+
+          filterSelect.addEventListener('change', handleCategoryFilter);
+        }
+        
+        function setupSearchListener() {
+          const searchBox = document.getElementById('searchBox');
+          searchBox.addEventListener('input', debounce(handleSearch, 300));
+        }
+        
+        function handleSearch(event) {
+          const query = event.target.value.toLowerCase().trim();
+          filteredPosts = blogPosts.filter(post => {
+            const matchesSearch = !query || (
+              post.title.toLowerCase().includes(query) ||
+              post.excerpt.toLowerCase().includes(query) ||
+              post.author.toLowerCase().includes(query) ||
+              post.tags.some(tag => tag.toLowerCase().includes(query))
+            );
+        
+            const matchesCategory = currentCategory === 'all' || post.category === currentCategory;
+            return matchesSearch && matchesCategory;
+          });
+        
+          displayBlogPosts();
+          updateStats();
+        }
+
+        function handleCategoryFilter(event) {
+          currentCategory = event.target.value;
+          const searchBox = document.getElementById('searchBox');
+          handleSearch({ target: searchBox });
+        }
+        
+        function displayBlogPosts() {
+          const container = document.getElementById('blogContainer');
+        
+          if (filteredPosts.length === 0) {
+            container.innerHTML = `
+              <div class="no-results">
+                <h3>📝 No Articles Found</h3>
+                <p>Try adjusting your search terms or category filter to discover more content.</p>
+              </div>
+            `;
+            return;
+          }
+        
+          const grid = document.createElement('div');
+          grid.className = 'blog-grid';
+        
+          filteredPosts.forEach(post => {
+            const card = createBlogCard(post);
+            grid.appendChild(card);
+          });
+        
+          container.innerHTML = '';
+          container.appendChild(grid);
+        }
+        
+        function createBlogCard(post) {
+          const card = document.createElement('div');
+          card.className = 'blog-post';
+
+          const formattedDate = new Date(post.publishDate).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+          });
+
+          const tagsHTML = post.tags
+            .slice(0, 3)
+            .map(tag => `<span class="tag">${escapeHtml(tag)}</span>`)
+            .join('');
+        
+          card.innerHTML = `
+            <div class="post-header">
+              <div class="post-meta">
+                <div class="post-date">📅 ${formattedDate}</div>
+                <div class="post-author">👤 ${escapeHtml(post.author)}</div>
+                <div class="post-read-time">⏱️ ${post.readTime} min</div>
+              </div>
+              <h2 class="post-title">${escapeHtml(post.title)}</h2>
+              <p class="post-excerpt">${escapeHtml(post.excerpt)}</p>
+              <div class="post-tags">${tagsHTML}</div>
+            </div>
+            <div class="post-footer">
+              <div class="post-category">${escapeHtml(post.category)}</div>
+              <a href="${post.url}" target="_blank" rel="noopener noreferrer" class="read-more-btn">
+                Read More →
+              </a>
+            </div>
+          `;
+          return card;
+        }
+        
+        function escapeHtml(text) {
+          const div = document.createElement('div');
+          div.textContent = text;
+          return div.innerHTML;
+        }
+        
+        function updateStats() {
+          document.getElementById('totalPosts').textContent = filteredPosts.length;
+          
+          const categories = new Set(filteredPosts.map(post => post.category));
+          document.getElementById('totalCategories').textContent = categories.size;
+          
+          const avgTime = filteredPosts.length > 0 
+            ? Math.round(filteredPosts.reduce((sum, post) => sum + post.readTime, 0) / filteredPosts.length)
+            : 0;
+          document.getElementById('avgReadTime').textContent = avgTime + 'm';
+        }
+        
+        function debounce(func, wait) {
+          let timeout;
+          return function (...args) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func(...args), wait);
+          };
+        }
+        
+        function reloadBlog() {
+          currentCategory = 'all';
+          document.getElementById('searchBox').value = '';
+          document.getElementById('categoryFilter').value = 'all';
+          loadBlogPosts();
+        }
+        
+        // Initialize the application
+        init();
+    </script>
+
+    <script>
+        particlesJS('particles-js', {
+          "particles": {
+            "number": { "value": 100, "density": { "enable": true, "value_area": 1000 } },
+            "color": { "value": "#ffffff" },
+            "shape": { "type": "circle" },
+            "opacity": { "value": 0.4, "random": true },
+            "size": { "value": 3, "random": true },
+            "line_linked": {
+              "enable": true,
+              "distance": 120,
+              "color": "#ffffff",
+              "opacity": 0.3,
+              "width": 1
+            },
+            "move": {
+              "enable": true,
+              "speed": 1.5,
+              "direction": "none",
+              "random": true,
+              "out_mode": "out"
+            }
+          },
+          "interactivity": {
+            "events": {
+              "onhover": { "enable": true, "mode": "grab" },
+              "onclick": { "enable": true, "mode": "push" }
+            },
+            "modes": {
+              "grab": { "distance": 150, "line_linked": { "opacity": 0.4 } },
+              "push": { "particles_nb": 3 }
+            }
+          },
+          "retina_detect": true
+        });
+    </script>
+
+</body>
+
+</html>

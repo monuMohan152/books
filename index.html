@@ -148,6 +148,7 @@
       max-height: 200px;
       overflow-y: auto;
       padding: 10px;
+      overflow-x: auto; /* Optional: allows horizontal scroll on small screens */
     }
 
     .filter-btn {
@@ -161,11 +162,17 @@
       font-size: 0.9rem;
       cursor: pointer;
       transition: all 0.3s ease;
+
       white-space: nowrap;
+      overflow: visible;
+      text-overflow: unset;
+
       text-align: center;
-      min-width: 80px;
+      min-width: max-content;     /* ensures full text shows */
+      flex-shrink: 0;             /* prevents squeezing */
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
+
 
     .filter-btn:hover {
       background: linear-gradient(135deg, #6366f1, #8b5cf6);

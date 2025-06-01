@@ -19,3 +19,36 @@ TutorialsPoint C++ Tutorial,https://www.tutorialspoint.com/cplusplus/,"C++,Progr
 TutorialsPoint C Tutorial,https://www.tutorialspoint.com/cprogramming/,"C Programming,Tutorial,TutorialsPoint",Complete C programming language tutorial with examples,Programming,C Programming,Tutorial,Basics
 Official React Documentation,https://react.dev/learn,"React,JavaScript,Official Documentation",Official React documentation and learning resources,Web Development,React,JavaScript,Official
 Official Node.js Documentation,https://nodejs.org/en/learn/getting-started/introduction-to-nodejs,"Node.js,JavaScript,Official Documentation",Official Node.js learning guide and documentation,Programming,Node.js,Backend,Official
+MDN Web Docs JavaScript,https://developer.mozilla.org/en-US/docs/Web/JavaScript,"MDN,JavaScript,Web Development",Mozilla Developer Network JavaScript documentation and tutorials,Web Development,JavaScript,MDN,Documentation
+Khan Academy Programming,https://www.khanacademy.org/computing/computer-programming,"Khan Academy,Programming,Free Education",Free programming courses including JavaScript and SQL,Education,Programming,Khan Academy,Free
+Codecademy Python Course,https://www.codecademy.com/learn/learn-python-3,"Codecademy,Python,Interactive Learning",Interactive Python 3 programming course with hands-on exercises,Programming,Python,Interactive,Codecademy
+freeCodeCamp Curriculum,https://www.freecodecamp.org/learn/,"freeCodeCamp,Web Development,Free Certification",Free full-stack web development curriculum with certifications,Web Development,freeCodeCamp,Full Stack,Certification
+GitHub Learning Lab,https://lab.github.com/,"GitHub,Git,Version Control",Interactive courses for learning Git and GitHub workflows,Programming,Git,GitHub,Version Control
+Stack Overflow Documentation,https://stackoverflow.com/,"Stack Overflow,Programming,Q&A",Programming questions and answers community platform,Programming,Community,Q&A,Documentation
+GeeksforGeeks Data Structures,https://www.geeksforgeeks.org/data-structures/,"GeeksforGeeks,Data Structures,Algorithms",Comprehensive data structures and algorithms tutorial,Programming,Data Structures,Algorithms,GeeksforGeeks
+Coursera Programming Courses,https://www.coursera.org/browse/computer-science,"Coursera,Programming,University Courses",University-level programming and computer science courses,Education,Programming,University,Coursera
+edX Computer Science,https://www.edx.org/learn/computer-science,"edX,Computer Science,MIT,Harvard",Computer science courses from top universities like MIT and Harvard,Education,Computer Science,University,edX
+Udemy Programming Courses,https://www.udemy.com/courses/development/,"Udemy,Programming,Paid Courses",Comprehensive programming courses across multiple languages,Education,Programming,Udemy,Paid
+LeetCode Practice,https://leetcode.com/,"LeetCode,Coding Interview,Algorithm Practice",Coding interview preparation with algorithm and data structure problems,Programming,Interview Prep,Algorithms,Practice
+HackerRank Challenges,https://www.hackerrank.com/,"HackerRank,Coding Challenges,Interview Prep",Programming challenges and coding interview preparation,Programming,Challenges,Interview Prep,Practice
+Codewars Kata,https://www.codewars.com/,"Codewars,Programming Challenges,Code Kata",Programming challenges and kata for skill improvement,Programming,Challenges,Practice,Community
+Repl.it Online IDE,https://replit.com/,"Replit,Online IDE,Programming Environment",Online integrated development environment for multiple languages,Programming,IDE,Online,Development
+JSFiddle Online Editor,https://jsfiddle.net/,"JSFiddle,JavaScript,HTML,CSS",Online editor for HTML CSS JavaScript code testing,Web Development,JavaScript,HTML,Online Editor
+CodePen Online Editor,https://codepen.io/,"CodePen,Frontend,HTML,CSS,JavaScript",Online code editor for frontend web development,Web Development,Frontend,HTML,CSS
+Bootstrap Official Docs,https://getbootstrap.com/docs/,"Bootstrap,CSS Framework,Responsive Design",Official Bootstrap CSS framework documentation,Web Development,CSS,Framework,Bootstrap
+Tailwind CSS Docs,https://tailwindcss.com/docs,"Tailwind CSS,Utility-First,CSS Framework",Utility-first CSS framework documentation,Web Development,CSS,Framework,Tailwind
+Vue.js Official Guide,https://vuejs.org/guide/,"Vue.js,JavaScript Framework,Frontend",Official Vue.js progressive JavaScript framework guide,Web Development,Vue.js,JavaScript,Frontend
+Angular Official Docs,https://angular.io/docs,"Angular,TypeScript,Google,Frontend Framework",Official Angular framework documentation from Google,Web Development,Angular,TypeScript,Frontend
+Django Official Tutorial,https://docs.djangoproject.com/en/stable/intro/tutorial01/,"Django,Python,Web Framework",Official Django Python web framework tutorial,Web Development,Django,Python,Backend
+Flask Documentation,https://flask.palletsprojects.com/,"Flask,Python,Microframework",Flask Python microframework documentation,Web Development,Flask,Python,Microframework
+Spring Boot Guide,https://spring.io/guides/gs/spring-boot/,"Spring Boot,Java,Enterprise",Spring Boot Java framework getting started guide,Programming,Java,Spring Boot,Enterprise
+Express.js Guide,https://expressjs.com/en/starter/installing.html,"Express.js,Node.js,Backend",Express.js Node.js web framework guide,Web Development,Node.js,Backend,Express
+MongoDB Documentation,https://docs.mongodb.com/,"MongoDB,NoSQL,Database",MongoDB NoSQL database official documentation,Database,MongoDB,NoSQL,Documentation
+MySQL Tutorial,https://dev.mysql.com/doc/,"MySQL,SQL Database,Relational",MySQL relational database management system documentation,Database,MySQL,SQL,Relational
+PostgreSQL Documentation,https://www.postgresql.org/docs/,"PostgreSQL,SQL Database,Open Source",PostgreSQL open source relational database documentation,Database,PostgreSQL,SQL,Open Source
+Redis Documentation,https://redis.io/documentation,"Redis,In-Memory Database,Caching",Redis in-memory data structure store documentation,Database,Redis,Caching,In-Memory
+Docker Documentation,https://docs.docker.com/,"Docker,Containerization,DevOps",Docker containerization platform official documentation,DevOps,Docker,Containerization,Documentation
+Kubernetes Documentation,https://kubernetes.io/docs/,"Kubernetes,Container Orchestration,DevOps",Kubernetes container orchestration system documentation,DevOps,Kubernetes,Orchestration,Containers
+AWS Documentation,https://docs.aws.amazon.com/,"AWS,Cloud Computing,Amazon",Amazon Web Services cloud platform documentation,Cloud Computing,AWS,Amazon,Documentation
+Google Cloud Docs,https://cloud.google.com/docs,"Google Cloud,GCP,Cloud Platform",Google Cloud Platform documentation and guides,Cloud Computing,Google Cloud,GCP,Documentation
+Microsoft Azure Docs,https://docs.microsoft.com/en-us/azure/,"Azure,Microsoft,Cloud Computing",Microsoft Azure cloud computing platform documentation,Cloud Computing,Azure,Microsoft,Documentation
